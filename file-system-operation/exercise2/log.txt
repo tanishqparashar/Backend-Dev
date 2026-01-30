@@ -1,0 +1,6 @@
+INFO Server started
+ERROR Database error
+INFO User login
+WARNING Disk almost full
+ERROR File missing
+INFO Logout
