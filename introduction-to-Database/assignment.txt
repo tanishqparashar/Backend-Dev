@@ -1,0 +1,163 @@
+q1).
+{
+  name: "Tanishq",
+  email: "tanishq@gmail.com",
+  gpa: 3.4,
+  city: "noida",
+  courses: ["Math", "DBMS", "OS"],
+  department: "CSE"
+}
+q2).
+db.students.insertOne({
+  name: "Tanishq",
+  email: "Tanishq@gmail.com",
+  gpa: 3.4,
+  city: "noida",
+  courses: ["Math", "DBMS", "OS"],
+  department: "CSE"
+})
+q3).
+db.students.find()
+q4).
+db.students.findOne({ email: "Tanishq@gmail.com.com" })
+q5).
+db.students.updateOne(
+  { email: "Tanishq@gmail.com" },
+  { $set: { gpa: 3.8 } }
+)
+q6).
+
+db.students.deleteOne({ email: "Tanishq@gmail.com.com" })
+q7).
+db.students.find({
+  gpa: { $gte: 3.0, $lte: 3.5 }
+})
+q8).
+db.students.find({
+  courses: { $size: 6 }
+})
+q9).
+db.students.find({
+  $expr: { $gt: [ { $size: "$courses" }, 5 ] }
+})
+q10).
+db.students.find()
+  .sort({ gpa: -1 })
+  .limit(10)
+  q11).
+  db.students.aggregate([
+  {
+    $group: {
+      _id: "$city",
+      totalStudents: { $sum: 1 }
+    }
+  }
+])
+q12).
+{
+  courseName: "DBMS",
+  courseCode: "CS101",
+  credits: 4,
+  prerequisites: ["CS100", "CS099"]
+}
+q13).
+{
+  name: "Dr. Sharma",
+  email: "sharma@college.com",
+  departments: ["CSE", "IT"],
+  experience: 10
+}
+q14).
+{
+  studentId: ObjectId("..."),
+  courseId: ObjectId("..."),
+  grade: "A",
+  semester: "2025 Spring"
+}
+q15).
+db.students.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      avgGPA: { $avg: "$gpa" }
+    }
+  }
+])
+q16).
+db.students.aggregate([
+  { $unwind: "$courses" },
+  {
+    $group: {
+      _id: "$courses",
+      count: { $sum: 1 }
+    }
+  },
+  { $sort: { count: -1 } }
+])
+q17).
+db.students.aggregate([
+  {
+    $project: {
+      name: 1,
+      gpa: 1,
+      performance: {
+        $cond: {
+          if: { $gte: ["$gpa", 3.5] },
+          then: "Excellent",
+          else: "Average"
+        }
+      }
+    }
+  }
+])
+//second pdf
+q1).
+| System                     | Database  | Justification                                                    |
+| -------------------------- | --------- | ---------------------------------------------------------------- |
+| Online Banking System      | **SQL**   | Needs high security, transactions, consistency (ACID properties) |
+| Social Media Platform      | **NoSQL** | Large data, flexible schema, fast reads/writes                   |
+| Real-time Chat Application | **NoSQL** | Real-time messages, high speed, scalable                         |
+| Hospital Patient Records   | **SQL**   | Structured data, relationships, high consistency                 |
+| IoT Sensor Data Collection | **NoSQL** | Huge continuous data, flexible and scalable                      |
+q2).
+| System                   | CAP Priority                                |
+| ------------------------ | ------------------------------------------- |
+| Stock trading platform   | **CP** (Consistency + Partition tolerance)  |
+| Content delivery network | **AP** (Availability + Partition tolerance) |
+| Airline booking system   | **CP**                                      |
+| Video streaming service  | **AP**                                      |
+q3).
+db.books.insertOne({
+  title: "MongoDB Basics",
+  author: "John Smith",
+  available: true,
+  borrower: null
+})
+Q5).
+db.books.find({ author: "John Smith" })
+q6).
+db.books.updateOne(
+  { title: "MongoDB Basics" },
+  { $set: { available: false } }
+)
+q7).
+db.books.updateOne(
+  { title: "MongoDB Basics" },
+  { $set: { borrower: "Rahul" } }
+)
+q8).
+db.books.find({ borrower: "Tanishq" })
+q9).
+{
+ "orderId": "12345",
+ "orderDate": "2024-01-15",
+ "totalAmount": "99.99",
+ "items": ["item1", "item2"]
+}
+q10).
+{
+  orderId: NumberInt(12345),
+  orderDate: ISODate("2024-01-15"),
+  totalAmount: NumberDecimal("99.99"),
+  items: ["item1", "item2"]
+}
